@@ -1,6 +1,7 @@
 <?php
 
 use Core\Response;
+use Core\Session;
 
 function dd($value)
 {
@@ -53,4 +54,18 @@ function redirect($path)
 function old($key, $default = '')
 {
     return Core\Session::get('old')[$key] ?? $default;
+}
+
+function login($user)
+{
+    $_SESSION['user'] = [
+        'email' => $user['email'],
+    ];
+
+    session_regenerate_id(true);
+}
+
+function logout()
+{
+    Session::destroy();
 }
